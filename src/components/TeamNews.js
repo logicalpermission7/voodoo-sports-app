@@ -1,36 +1,34 @@
 import React,{useState} from 'react';
-import Details from './Details';
+import TeamDetails from './TeamDetails';
 
-function Form(){
-    const [isLoading, setLoading] = useState(true);
+function TeamNews(){
+    const [isLoading, setLoading] = useState(false);
     const [error,setError] = useState(null);
     const [team,setTeam] = useState("DAL");
-    const [name,setName] = useState([]);
-    const [awayTeam,setAwayTeam] = useState([]);
-    const [stadium,setStadium] = useState([]);
-    const [city,setCity] = useState([]);
-    const [state,setState] = useState([]);
-    const [date,setDate] = useState([]);
-    const [playingSurface,setPlayingSurface] = useState([]);
-    const [stadiumType,setStadiumType] = useState([]);
-    const [forcast,setForcast] = useState([]);
-    const [week,setWeek] = useState([]);
-    
-    
+    const [title,setTitle] = useState([]);
+    const [content,setContent] = useState([]);
     const dotenv = require('dotenv');
     const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`;
     dotenv.config();
 
-    const getSportStats = async (e) =>{
+//useEffect(() => {
+//getTeamNews();
+//console.log("use effect ran..");
+// }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
+
+
+    
+    const getTeamNews = async (e) => {
+        setLoading(true);
         e.preventDefault();
-        const response = await fetch(` https://api.sportsdata.io/v3/nfl/odds/json/TeamTrends/${team}?key=${SPORTS_API_KEY}`);
+        const response = await fetch(`https://api.sportsdata.io/v3/nfl/scores/json/NewsByTeam/${team}?key=${SPORTS_API_KEY}`);
 
         try {
             if (!response.ok){ // checks if response object is not ok, then throws a message.
               console.log("error!!!")
               throw Error("Oops! Something went wrong.");   
             }
-          
+
           }
           catch{
             setLoading(false);
@@ -39,43 +37,30 @@ function Form(){
           }
 
 
-
-
-        const sport_data = await response.json();
-        console.log(response);
-        console.log(sport_data);
+        const team_news = await response.json();
         setLoading(false);
-        setName(sport_data.UpcomingGame.AwayTeam);
-        setAwayTeam(sport_data.UpcomingGame.HomeTeam);
-        setStadium(sport_data.UpcomingGame.StadiumDetails.Name);
-        setCity(sport_data.UpcomingGame.StadiumDetails.City);
-        setState(sport_data.UpcomingGame.StadiumDetails.State);
-        setDate(sport_data.UpcomingGame.Date);
-        setPlayingSurface(sport_data.UpcomingGame.StadiumDetails.PlayingSurface);
-        setStadiumType(sport_data.UpcomingGame.StadiumDetails.Type);
-        setForcast(sport_data.UpcomingGame.ForecastDescription);
-        setWeek(sport_data.UpcomingGame.Week);
-        
-
-
-        
+        console.log(response);
+        console.log(team_news);
+        setTitle(team_news[0].Title);
+        setContent(team_news[0].Content);
+    
     }
-          
-    //useEffect(() => {
-    //    getSportStats();
-    //    console.log("use effect ran..");
- // }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
-      
+
+
 
 
 
 
     return(
         <div className="login-form">
-        
-            <form onSubmit={getSportStats}>
+            <div className='home'>
                 {error && <div>{error}</div>}
-                {isLoading && <div>Loading....</div>}
+                {isLoading && <div>Loading.....</div>}
+                <TeamDetails
+                title={title}
+                content={content}/>
+            </div>
+            <form onSubmit={getTeamNews}>
                 <select value={team} onChange={(e) => setTeam(e.target.value)}>
                     <option value='ARI'>Arizona Cardinals</option>
                     <option value='ATL'>Atlanta Falcons</option>
@@ -110,26 +95,10 @@ function Form(){
                     <option value='TEN'>Tennessee Titans</option>
                     <option value='WAS'>Washington Football Team</option>
                 </select>
-                <button onSubmit={getSportStats}>Search Next Game Data</button>
+                <button onSubmit={getTeamNews}>Search Team News</button>
             </form>
-            <div className='home'>
-                <Details name={name}
-                awayTeam={awayTeam}
-                stadium={stadium}
-                city={city}
-                state={state}
-                date={date}
-                playingSurface={playingSurface}
-                stadiumType={stadiumType}
-                forcast={forcast}
-                week={week}
-
-
-                
-                />
-            </div>
         </div>
         
     )
 }
-export default Form;
+export default TeamNews;

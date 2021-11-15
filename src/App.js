@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav';
-import Home from './components/Home';
-import About from './components/About';
+import GameData from './components/GameData';
+import TeamNews from './components/TeamNews';
+import MLB from './components/MLB';
 
 
 function App() {
@@ -14,10 +15,11 @@ return (
     <div className="content">
       <Switch>
         <Route exact path="/">
-            <Home/>
+            <GameData/>
+            <TeamNews/>
         </Route>
         <Route path="/About">
-            <About/>
+            <MLB/>
         </Route>
       </Switch>
     </div>

@@ -67,7 +67,26 @@
 }
 
 
-
+/* info previews for team news / list */
+.info-preview-team{
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+  text-align: left;
+}
+.info-preview-team h2{
+  font-size: 10px;
+  color: #f1356d;
+  margin-bottom: 8px;
+}
+.info-preview-team h1{
+  font-size: 15px;
+  color: #000000;
+  margin-bottom: 8px;
+}
+.info-preview-team:hover{
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
 
 .login-form{
   max-width: 400px;

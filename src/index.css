@@ -15,6 +15,7 @@
 .navbar h1{
   color: #f1356d;
 }
+
 .navbar .links{
   margin-left: auto;
 }
@@ -37,6 +38,7 @@
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
   text-align: left;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
 
 .info-preview:hover{
@@ -73,6 +75,7 @@
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
   text-align: left;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
 .info-preview-team h2{
   font-size: 10px;
@@ -107,7 +110,7 @@
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
-  border: 1px solid #ddd;
+  border: 1px solid #f1356d;
   box-sizing: border-box;
   display: block;
 

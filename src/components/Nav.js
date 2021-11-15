@@ -7,7 +7,8 @@ function Nav(){
             <h1>VDSports</h1>
             <div className="links">
                 <Link to="/">HOME</Link>
-                <Link to="/About">MLB</Link>
+                <Link to="/MLB">MLB</Link>
+                <Link to="/NBA">NBA</Link>
 
             </div>
         </div>

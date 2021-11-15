@@ -70,7 +70,7 @@ function GameData(){
         <div className="login-form">
             <form onSubmit={getGameData}>
                 {error && <div>{error}</div>}
-                {isLoading && <div>Loading.....</div>}
+                {isLoading && <div>Loading.....</div>}<br/><br/>
                 <select value={team} onChange={(e) => setTeam(e.target.value)}>
                     <option value='ARI'>Arizona Cardinals</option>
                     <option value='ATL'>Atlanta Falcons</option>

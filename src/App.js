@@ -4,6 +4,7 @@ import Nav from './components/Nav';
 import GameData from './components/GameData';
 import TeamNews from './components/TeamNews';
 import MLB from './components/MLB';
+import NBA from './components/NBA';
 
 
 function App() {
@@ -18,8 +19,11 @@ return (
             <GameData/>
             <TeamNews/>
         </Route>
-        <Route path="/About">
+        <Route path="/MLB">
             <MLB/>
+        </Route>
+        <Route path="/NBA">
+            <NBA/>
         </Route>
       </Switch>
     </div>

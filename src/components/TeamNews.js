@@ -39,8 +39,8 @@ function TeamNews(){
 
         const team_news = await response.json();
         setLoading(false);
-        console.log(response);
-        console.log(team_news);
+        //console.log(response);
+        //console.log(team_news);
         setTitle(team_news[0].Title);
         setContent(team_news[0].Content);
     

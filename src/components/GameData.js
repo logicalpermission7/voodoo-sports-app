@@ -48,8 +48,8 @@ function GameData(){
 
         const sport_data = await response.json();
         setLoading(false);
-        console.log(response);
-        console.log(sport_data);
+        //console.log(response);
+        //console.log(sport_data);
         setName(sport_data.UpcomingGame.AwayTeam);
         setAwayTeam(sport_data.UpcomingGame.HomeTeam);
         setStadium(sport_data.UpcomingGame.StadiumDetails.Name);

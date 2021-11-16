@@ -1,5 +1,6 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import TeamDetails from './TeamDetails';
+
 
 function TeamNews(){
     const [isLoading, setLoading] = useState(false);
@@ -11,16 +12,16 @@ function TeamNews(){
     const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`;
     dotenv.config();
 
-//useEffect(() => {
-//getTeamNews();
-//console.log("use effect ran..");
-// }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
+useEffect(() => {
+getTeamNews();
+console.log("use effect ran..");
+ }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
 
 
     
-    const getTeamNews = async (e) => {
+    const getTeamNews = async () => {
         setLoading(true);
-        e.preventDefault();
+        //e.preventDefault();
         const response = await fetch(`https://api.sportsdata.io/v3/nfl/scores/json/NewsByTeam/${team}?key=${SPORTS_API_KEY}`);
 
         try {

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import GameDetails from './GameDetails';
 
 function GameData(){
@@ -19,17 +19,17 @@ function GameData(){
     const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`;
     dotenv.config();
 
-//useEffect(() => {
-//getGameData();
-//console.log("use effect ran..");
-// }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
+useEffect(() => {
+getGameData();
+console.log("use effect ran..");
+ }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
 
 
     
 
-    const getGameData = async (e) =>{
+    const getGameData = async () =>{
         setLoading(true);
-        e.preventDefault();
+        //e.preventDefault();
         const response = await fetch(` https://api.sportsdata.io/v3/nfl/odds/json/TeamTrends/${team}?key=${SPORTS_API_KEY}`);
     
 

@@ -105,7 +105,6 @@ function GameData(){
                     <option value='TEN'>Tennessee Titans</option>
                     <option value='WAS'>Washington Football Team</option>
                 </select>
-                <button onSubmit={getGameData}>Search Next Game</button>
             </form>
             <div className='home'>
                 <GameDetails name={name}
@@ -120,6 +119,7 @@ function GameData(){
                 week={week} 
                 />
             </div>
+            <button onClick={getGameData}>Search Next Game</button>
         </div>
         
     )

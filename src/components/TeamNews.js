@@ -53,13 +53,6 @@ function TeamNews(){
 
     return(
         <div className="login-form">
-            <div className='home'>
-                {error && <div>{error}</div>}
-                {isLoading && <div>Loading.....</div>}
-                <TeamDetails
-                title={title}
-                content={content}/>
-            </div>
             <form onSubmit={getTeamNews}>
                 <select value={team} onChange={(e) => setTeam(e.target.value)}>
                     <option value='ARI'>Arizona Cardinals</option>
@@ -95,8 +88,15 @@ function TeamNews(){
                     <option value='TEN'>Tennessee Titans</option>
                     <option value='WAS'>Washington Football Team</option>
                 </select>
-                <button onSubmit={getTeamNews}>Search Team News</button>
             </form>
+            <div className='home'>
+                {error && <div>{error}</div>}
+                {isLoading && <div>Loading.....</div>}<br/><br/>
+                <TeamDetails
+                title={title}
+                content={content}/>
+            </div>  
+            <button onClick={getTeamNews}>Search Team News</button>
         </div>
         
     )

@@ -68,9 +68,22 @@ console.log("use effect ran..");
 
     return(
         <div className="login-form">
+          {error && <div>{error}</div>}
+          {isLoading && <div>Loading.....</div>}
+          <div className='home'>
+                <GameDetails name={name}
+                awayTeam={awayTeam}
+                stadium={stadium}
+                city={city}
+                state={state}
+                date={date}
+                playingSurface={playingSurface}
+                stadiumType={stadiumType}
+                forcast={forcast}
+                week={week} 
+                />
+            </div>
             <form onSubmit={getGameData}>
-                {error && <div>{error}</div>}
-                {isLoading && <div>Loading.....</div>}<br/><br/>
                 <select value={team} onChange={(e) => setTeam(e.target.value)}>
                     <option value='ARI'>Arizona Cardinals</option>
                     <option value='ATL'>Atlanta Falcons</option>
@@ -106,20 +119,7 @@ console.log("use effect ran..");
                     <option value='WAS'>Washington Football Team</option>
                 </select>
             </form>
-            <div className='home'>
-                <GameDetails name={name}
-                awayTeam={awayTeam}
-                stadium={stadium}
-                city={city}
-                state={state}
-                date={date}
-                playingSurface={playingSurface}
-                stadiumType={stadiumType}
-                forcast={forcast}
-                week={week} 
-                />
-            </div>
-            <button onClick={getGameData}>Search Next Game</button>
+            <button onClick={getGameData}>Search Next Game</button><br/><br/>
         </div>
         
     )

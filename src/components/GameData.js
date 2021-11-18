@@ -14,9 +14,15 @@ function GameData(){
     const [playingSurface,setPlayingSurface] = useState([]);
     const [stadiumType,setStadiumType] = useState([]);
     const [forcast,setForcast] = useState([]);
+    const [averageScore,setAverageScore] = useState([]);
+    const [favorite,setFavorite] = useState([]);
+    const [winsAgaintsTheSpreadFavorite,setWinsAgaintsTheSpreadFavorite] = useState([]);
+    const [lostAgaintsTheSpreadFavorite,setLostAgaintsTheSpreadFavorite] = useState([]);
+    const [winsAgainstTheSpreadUnderDog,setWinsAgaintsTheSpreadUnderDog] = useState([]);
+    const [lostAgaintsTheSpreadUnderDog,setLostAgaintsTheSpreadUnderDog] = useState([]);
     const [week,setWeek] = useState([]);
     const dotenv = require('dotenv');
-    const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`;
+    const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`
     dotenv.config();
 
 useEffect(() => {
@@ -49,7 +55,7 @@ console.log("use effect ran..");
         const sport_data = await response.json();
         setLoading(false);
         //console.log(response);
-        //console.log(sport_data);
+        console.log(sport_data);
         setName(sport_data.UpcomingGame.AwayTeam);
         setAwayTeam(sport_data.UpcomingGame.HomeTeam);
         setStadium(sport_data.UpcomingGame.StadiumDetails.Name);
@@ -59,12 +65,17 @@ console.log("use effect ran..");
         setPlayingSurface(sport_data.UpcomingGame.StadiumDetails.PlayingSurface);
         setStadiumType(sport_data.UpcomingGame.StadiumDetails.Type);
         setForcast(sport_data.UpcomingGame.ForecastDescription);
-        setWeek(sport_data.UpcomingGame.Week);    
-    }
-          
-   
+        setWeek(sport_data.UpcomingGame.Week);  
+        setAverageScore(sport_data.TeamGameTrends[14].AverageScore);  
+        setFavorite(sport_data.TeamGameTrends[11].AverageScore);
+        setWinsAgaintsTheSpreadFavorite(sport_data.TeamGameTrends[11].WinsAgainstTheSpread);
+        setWinsAgaintsTheSpreadUnderDog(sport_data.TeamGameTrends[14].WinsAgainstTheSpread);
+        setLostAgaintsTheSpreadUnderDog(sport_data.TeamGameTrends[14].LossesAgainstTheSpread);
+        setLostAgaintsTheSpreadFavorite(sport_data.TeamGameTrends[11].LossesAgainstTheSpread);
 
-    
+
+    }
+
 
     return(
         <div className="login-form">
@@ -81,6 +92,12 @@ console.log("use effect ran..");
                 stadiumType={stadiumType}
                 forcast={forcast}
                 week={week} 
+                averageScore={averageScore}
+                favorite={favorite}
+                winsAgaintsTheSpreadFavorite={winsAgaintsTheSpreadFavorite}
+                winsAgainstTheSpreadUnderDog={winsAgainstTheSpreadUnderDog}
+                lostAgaintsTheSpreadUnderDog={lostAgaintsTheSpreadUnderDog}
+                lostAgaintsTheSpreadFavorite={lostAgaintsTheSpreadFavorite}
                 />
             </div>
             <form onSubmit={getGameData}>

@@ -49,14 +49,25 @@
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
 
-.info-preview h2{
+.versus h2{
   font-size: 20px;
-  color: #f1356d;
+  color: #e4f135;
   margin-bottom: 8px;
 }
 .info-preview h1{
   font-size: 15px;
   color: #fff;
+  margin-bottom: 8px;
+}
+.underdog h1{
+  font-size: 15px;
+  color: rgb(223, 248, 0);
+  margin-bottom: 8px;
+
+}
+.favorite h1{
+  font-size: 15px;
+  color: rgb(0, 248, 21);
   margin-bottom: 8px;
 }
 .visible:after{

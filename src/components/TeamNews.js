@@ -14,7 +14,7 @@ function TeamNews(){
 
 useEffect(() => {
 getTeamNews();
-console.log("use effect ran..");
+//console.log("use effect ran..");
  }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
 
 
@@ -97,7 +97,7 @@ console.log("use effect ran..");
                     <option value='WAS'>Washington Football Team</option>
                 </select>
             </form>
-            <button onClick={getTeamNews}>Search Team News</button>
+            <button onClick={getTeamNews}>Get Team News</button>
         </div>
         
     )

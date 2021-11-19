@@ -56,16 +56,16 @@
 }
 .info-preview h1{
   font-size: 15px;
-  color: #fff;
+  color: rgb(255, 255, 255);
   margin-bottom: 8px;
 }
-.underdog h1{
+.home-scores h1{
   font-size: 15px;
   color: rgb(223, 248, 0);
   margin-bottom: 8px;
 
 }
-.favorite h1{
+.away-scores h1{
   font-size: 15px;
   color: rgb(0, 248, 21);
   margin-bottom: 8px;

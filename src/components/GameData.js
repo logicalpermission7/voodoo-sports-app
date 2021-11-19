@@ -14,12 +14,18 @@ function GameData(){
     const [playingSurface,setPlayingSurface] = useState([]);
     const [stadiumType,setStadiumType] = useState([]);
     const [forcast,setForcast] = useState([]);
-    const [averageScore,setAverageScore] = useState([]);
-    const [favorite,setFavorite] = useState([]);
-    const [winsAgaintsTheSpreadFavorite,setWinsAgaintsTheSpreadFavorite] = useState([]);
-    const [lostAgaintsTheSpreadFavorite,setLostAgaintsTheSpreadFavorite] = useState([]);
-    const [winsAgainstTheSpreadUnderDog,setWinsAgaintsTheSpreadUnderDog] = useState([]);
-    const [lostAgaintsTheSpreadUnderDog,setLostAgaintsTheSpreadUnderDog] = useState([]);
+    const [averageScoreHome,setAverageScoreHome] = useState([]);
+    const [averageScoreAway,setAverageScoreAway] = useState([]);
+    const [winsAgaintsTheSpreadAway,setWinsAgaintsTheSpreadAway] = useState([]);
+    const [lostAgaintsTheSpreadAway,setLostAgaintsTheSpreadAway] = useState([]);
+    const [winsAgainstTheSpreadHome,setWinsAgaintsTheSpreadHome] = useState([]);
+    const [lostAgaintsTheSpreadHome,setLostAgaintsTheSpreadHome] = useState([]);
+    const [averageOpoScoreHome,setAverageOpoScoreHome] = useState([]);
+    const [averageOpoScoreAway,setAverageOpoScoreAway] = useState([]);
+    const [hometeam,setHomeTeam] = useState([]);
+    const [teamAway,setTeamAway] = useState([]);
+    const [homeTeamMoneyLine,setHomeTeamMoneyLine] = useState([]);
+    const [awayTeamMoneyLine,setAwayTeamMoneyLine] = useState([]);
     const [week,setWeek] = useState([]);
     const dotenv = require('dotenv');
     const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`
@@ -27,7 +33,7 @@ function GameData(){
 
 useEffect(() => {
 getGameData();
-console.log("use effect ran..");
+//console.log("use effect ran..");
  }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
 
 
@@ -55,7 +61,7 @@ console.log("use effect ran..");
         const sport_data = await response.json();
         setLoading(false);
         //console.log(response);
-        console.log(sport_data);
+        //console.log(sport_data);
         setName(sport_data.UpcomingGame.AwayTeam);
         setAwayTeam(sport_data.UpcomingGame.HomeTeam);
         setStadium(sport_data.UpcomingGame.StadiumDetails.Name);
@@ -66,12 +72,20 @@ console.log("use effect ran..");
         setStadiumType(sport_data.UpcomingGame.StadiumDetails.Type);
         setForcast(sport_data.UpcomingGame.ForecastDescription);
         setWeek(sport_data.UpcomingGame.Week);  
-        setAverageScore(sport_data.TeamGameTrends[14].AverageScore);  
-        setFavorite(sport_data.TeamGameTrends[11].AverageScore);
-        setWinsAgaintsTheSpreadFavorite(sport_data.TeamGameTrends[11].WinsAgainstTheSpread);
-        setWinsAgaintsTheSpreadUnderDog(sport_data.TeamGameTrends[14].WinsAgainstTheSpread);
-        setLostAgaintsTheSpreadUnderDog(sport_data.TeamGameTrends[14].LossesAgainstTheSpread);
-        setLostAgaintsTheSpreadFavorite(sport_data.TeamGameTrends[11].LossesAgainstTheSpread);
+        setAverageScoreHome(sport_data.TeamGameTrends[5].AverageScore);  
+        setAverageScoreAway(sport_data.TeamGameTrends[8].AverageScore);
+        setWinsAgaintsTheSpreadAway(sport_data.TeamGameTrends[8].WinsAgainstTheSpread);
+        setWinsAgaintsTheSpreadHome(sport_data.TeamGameTrends[5].WinsAgainstTheSpread);
+        setLostAgaintsTheSpreadHome(sport_data.TeamGameTrends[5].LossesAgainstTheSpread);
+        setLostAgaintsTheSpreadAway(sport_data.TeamGameTrends[8].LossesAgainstTheSpread);
+        setAverageOpoScoreHome(sport_data.TeamGameTrends[5].AverageOpponentScore);
+        setAverageOpoScoreAway(sport_data.TeamGameTrends[8].AverageOpponentScore);
+        setHomeTeam(sport_data.UpcomingGame.HomeTeam);
+        setHomeTeamMoneyLine(sport_data.UpcomingGame.HomeTeamMoneyLine);
+        setAwayTeamMoneyLine(sport_data.UpcomingGame.AwayTeamMoneyLine);
+        setTeamAway(sport_data.UpcomingGame.AwayTeam);
+
+
 
 
     }
@@ -92,12 +106,18 @@ console.log("use effect ran..");
                 stadiumType={stadiumType}
                 forcast={forcast}
                 week={week} 
-                averageScore={averageScore}
-                favorite={favorite}
-                winsAgaintsTheSpreadFavorite={winsAgaintsTheSpreadFavorite}
-                winsAgainstTheSpreadUnderDog={winsAgainstTheSpreadUnderDog}
-                lostAgaintsTheSpreadUnderDog={lostAgaintsTheSpreadUnderDog}
-                lostAgaintsTheSpreadFavorite={lostAgaintsTheSpreadFavorite}
+                averageScoreHome={averageScoreHome}
+                averageScoreAway={averageScoreAway}
+                winsAgaintsTheSpreadAway={winsAgaintsTheSpreadAway}
+                winsAgainstTheSpreadHome={winsAgainstTheSpreadHome}
+                lostAgaintsTheSpreadHome={lostAgaintsTheSpreadHome}
+                lostAgaintsTheSpreadAway={lostAgaintsTheSpreadAway}
+                averageOpoScoreHome={averageOpoScoreHome}
+                averageOpoScoreAway={averageOpoScoreAway}
+                hometeam={hometeam}
+                homeTeamMoneyLine={homeTeamMoneyLine}
+                awayTeamMoneyLine={awayTeamMoneyLine}
+                teamAway={teamAway}
                 />
             </div>
             <form onSubmit={getGameData}>
@@ -136,7 +156,7 @@ console.log("use effect ran..");
                     <option value='WAS'>Washington Football Team</option>
                 </select>
             </form>
-            <button onClick={getGameData}>Search Next Game</button><br/><br/>
+            <button onClick={getGameData}>Get My Spread</button><br/><br/>
         </div>
         
     )

@@ -8,7 +8,7 @@ function Nav(){
             <div className="links">
                 <Link to="/">HOME</Link>
                 <Link to="/MLB">MLB</Link>
-                <Link to="/NBA">NBA</Link>
+                <Link to="/CAL">MOPC</Link>
 
             </div>
         </div>

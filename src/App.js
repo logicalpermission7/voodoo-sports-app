@@ -3,8 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav';
 import GameData from './components/GameData';
 import TeamNews from './components/TeamNews';
+import Calculator from './components/Calculator';
 import MLB from './components/MLB';
-import NBA from './components/NBA';
+
+
+
 
 
 function App() {
@@ -20,10 +23,13 @@ return (
             <TeamNews/>
         </Route>
         <Route path="/MLB">
-            <MLB/>
+          <MLB/>
         </Route>
-        <Route path="/NBA">
-            <NBA/>
+        <Route path="/CAL">
+          <div className="cal-title">
+            <h1>Moneyline Odds Payout</h1>
+          </div>
+        <Calculator/>
         </Route>
       </Switch>
     </div>

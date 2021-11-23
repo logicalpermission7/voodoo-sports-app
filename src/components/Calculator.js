@@ -4,7 +4,7 @@ import FavoriteCalculator from './FavoriteCalculator';
 
 function Calculator(){
     return(
-        <div className="info-preview">
+        <div className="info-preview-calculator">
             <UnderdogCalculator/>
             <br/><br/>
             <FavoriteCalculator/>

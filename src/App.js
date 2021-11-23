@@ -1,10 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav';
 import GameData from './components/GameData';
 import TeamNews from './components/TeamNews';
 import Calculator from './components/Calculator';
-import MLB from './components/MLB';
+import Coms from './components/Coms';
+import NotFound from './components/NotFound';
+
 
 
 
@@ -22,14 +24,17 @@ return (
             <GameData/>
             <TeamNews/>
         </Route>
-        <Route path="/MLB">
-          <MLB/>
+        <Route path="/Coms">
+          <Coms/>
         </Route>
         <Route path="/CAL">
           <div className="cal-title">
             <h1>Moneyline Odds Payout</h1>
           </div>
         <Calculator/>
+        </Route>
+        <Route path="*">
+          <NotFound/>
         </Route>
       </Switch>
     </div>

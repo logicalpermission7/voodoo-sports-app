@@ -14,36 +14,30 @@ function TeamNews(){
 
 useEffect(() => {
 getTeamNews();
-//console.log("use effect ran..");
- }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
+ }, []); 
 
 
     
     const getTeamNews = async () => {
-        setLoading(true);
         //e.preventDefault();
-        const response = await fetch(`https://api.sportsdata.io/v3/nfl/scores/json/NewsByTeam/${team}?key=${SPORTS_API_KEY}`);
-
         try {
+            const response = await fetch(`https://api.sportsdata.io/v3/nfl/scores/json/NewsByTeam/${team}?key=${SPORTS_API_KEY}`);
             if (!response.ok){ // checks if response object is not ok, then throws a message.
               console.log("error!!!")
-              throw Error("Oops! Something went wrong.");   
+              throw Error("Oops! network or server side problems... :(");   
             }
-
-          }
-          catch{
+            const team_news = await response.json();
+            //console.log(response);
+            //console.log(team_news);
+            setTitle(team_news[0].Title);
+            setContent(team_news[0].Content);
+            setError(null);
+         }
+          catch (err){
+            setError("Oops! network or server side problems... :(");
+        } finally {
             setLoading(false);
-            return setError("Oops! Something went wrong.");
-            
-          }
-
-
-        const team_news = await response.json();
-        setLoading(false);
-        //console.log(response);
-        //console.log(team_news);
-        setTitle(team_news[0].Title);
-        setContent(team_news[0].Content);
+        }
     
     }
 
@@ -55,11 +49,11 @@ getTeamNews();
     return(
         <div className="login-form">
             <div className='home'>
-                {error && <div>{error}</div>}
-                {isLoading && <div>Loading.....</div>}<br/><br/>
-                <TeamDetails
+                {error && <div style={{color: "#fd2600"}}>{error}</div>}
+                {isLoading && <div style={{color: "rgb(0, 248, 21)"}}>Loading.....</div>}<br/><br/>
+                {!error && !isLoading && <TeamDetails
                 title={title}
-                content={content}/>
+                content={content}/>}
             </div>  
             <form onSubmit={getTeamNews}>
                 <select value={team} onChange={(e) => setTeam(e.target.value)}>

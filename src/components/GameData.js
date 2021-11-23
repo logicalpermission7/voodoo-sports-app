@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import GameDetails from './GameDetails';
 
 function GameData(){
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(true);
     const [error,setError] = useState(null);
     const [team,setTeam] = useState("DAL");
     const [name,setName] = useState([]);
@@ -34,32 +34,22 @@ function GameData(){
 useEffect(() => {
 getGameData();
 //console.log("use effect ran..");
- }, []); // empty useEffect dependency will insure function runs only onces when first rendered.
+ },[] ); // empty useEffect dependency will insure function runs only onces when first rendered.
 
 
     
 
     const getGameData = async () =>{
-        setLoading(true);
+      setLoading(true);
         //e.preventDefault();
-        const response = await fetch(` https://api.sportsdata.io/v3/nfl/odds/json/TeamTrends/${team}?key=${SPORTS_API_KEY}`);
-    
-
-        try {
-            if (!response.ok){ // checks if response object is not ok, then throws a message.
-              console.log("error!!!")
-              throw Error("Oops! Something went wrong.");   
-            }
-
-          }
-          catch{
-            setLoading(false);
-            return setError("Oops! Something went wrong.");
-            
-          }
-
-        const sport_data = await response.json();
-        setLoading(false);
+        
+          try {
+            const response = await fetch(` https://api.sportsdata.io/v3/nfl/odds/json/TeamTrends/${team}?key=${SPORTS_API_KEY}`);
+              if (!response.ok){ // checks if response object is not ok, then throws a message.
+                console.log("error!!!")
+                throw Error("Oops! network or server side problems... :(");   
+              }
+              const sport_data = await response.json();
         //console.log(response);
         //console.log(sport_data);
         setName(sport_data.UpcomingGame.AwayTeam);
@@ -84,19 +74,22 @@ getGameData();
         setHomeTeamMoneyLine(sport_data.UpcomingGame.HomeTeamMoneyLine);
         setAwayTeamMoneyLine(sport_data.UpcomingGame.AwayTeamMoneyLine);
         setTeamAway(sport_data.UpcomingGame.AwayTeam);
-
-
-
-
-    }
+        setError(null);
+        } catch (err) {
+          setError("Oops! network or server side problems... :(");
+        } finally {
+          setLoading(false);
+        }
+      }
 
 
     return(
         <div className="login-form">
-          {error && <div>{error}</div>}
-          {isLoading && <div>Loading.....</div>}
+          {error && <div style={{color: "#fd2600"}}>{error}</div>}
+          {isLoading && <div style={{color: "rgb(0, 248, 21)"}}>Loading.....</div>}
           <div className='home'>
-                <GameDetails name={name}
+                {!error && !isLoading  && <GameDetails 
+                name={name}
                 awayTeam={awayTeam}
                 stadium={stadium}
                 city={city}
@@ -118,7 +111,7 @@ getGameData();
                 homeTeamMoneyLine={homeTeamMoneyLine}
                 awayTeamMoneyLine={awayTeamMoneyLine}
                 teamAway={teamAway}
-                />
+                />}
             </div>
             <form onSubmit={getGameData}>
                 <select value={team} onChange={(e) => setTeam(e.target.value)}>

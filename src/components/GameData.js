@@ -27,9 +27,9 @@ function GameData(){
     const [homeTeamMoneyLine,setHomeTeamMoneyLine] = useState([]);
     const [awayTeamMoneyLine,setAwayTeamMoneyLine] = useState([]);
     const [week,setWeek] = useState([]);
-    const dotenv = require('dotenv');
+    require('dotenv').config();
     const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`
-    dotenv.config();
+  
 
 useEffect(() => {
 getGameData();

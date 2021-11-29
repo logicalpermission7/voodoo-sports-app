@@ -1,11 +1,11 @@
 import React from 'react';
-import Chat from './Chat';
+import Login from './Login';
 
 function Coms(){
     return(
         <div className="info-preview">
             <h1>Our chat box is currently under production...sorry :(</h1>
-            <Chat/>
+            <Login/>
         </div>
     )
 }

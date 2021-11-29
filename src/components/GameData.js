@@ -148,8 +148,8 @@ getGameData();
                     <option value='TEN'>Tennessee Titans</option>
                     <option value='WAS'>Washington Football Team</option>
                 </select>
+                
             </form>
-            <button onClick={getGameData}>Get My Spread</button><br/><br/>
         </div>
         
     )

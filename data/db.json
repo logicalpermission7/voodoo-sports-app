@@ -1,9 +1,9 @@
 {
   "messages": [
     {
-      "id": 1,
-      "author": "Marvin",
-      "body": "Hey anyone playing tonight?"
+      "author": "elvis",
+      "sendersText": "I am the master of the universe...",
+      "id": 1
     }
-]
+  ]
 }

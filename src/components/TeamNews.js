@@ -90,8 +90,8 @@ getTeamNews();
                     <option value='TEN'>Tennessee Titans</option>
                     <option value='WAS'>Washington Football Team</option>
                 </select>
+                <button onClick={getTeamNews}>Get Team News</button><br/><br/>
             </form>
-            <button onClick={getTeamNews}>Get Team News</button><br/><br/>
         </div>
         
     )

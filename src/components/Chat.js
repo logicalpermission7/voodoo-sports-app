@@ -2,18 +2,13 @@ import React,{useState,useEffect} from 'react';
 import ChatDetails from './ChatDetails';
 
 
-
-
 function Chat(){
 
-
-
-var [items,setItems] = useState(null);
+var [data,setData] = useState(null);
 const [isLoading, setLoading] = useState(true);
-const [error,setError] = useState(null);  
+const [error,setError] = useState(null); 
 
-
-const URL_API = "http://localhost:8000/messages"; // Testing end point only using the json server with local rest services.
+const URL_API = "http://localhost:8000/messages"; // Just a testing end point with the json server.
 
 
 useEffect(() => {
@@ -22,9 +17,11 @@ useEffect(() => {
         const response = await fetch(URL_API);
         if (!response.ok) throw Error("Oops! network or server side problems... :(");   
         const data = await response.json();
-        //console.log(data);
-        setItems(data);
-        } catch (err) {
+        console.log(data);
+        console.log(response);
+        setData(data);
+        } 
+        catch (err) {
           setError("Oops something went wrong..")
         } finally {
           setLoading(false);
@@ -37,7 +34,7 @@ useEffect(() => {
 
     return(
         <div>
-            {items && <ChatDetails items={items} />}
+            {data && <ChatDetails data={data} loading={isLoading} bad_load={error} />}
         </div>
     )
 }

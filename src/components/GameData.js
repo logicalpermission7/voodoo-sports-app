@@ -33,6 +33,7 @@ function GameData(){
 
 useEffect(() => {
 getGameData();
+//console.log(process.env);
 //console.log("use effect ran..");
  },[] ); // empty useEffect dependency will insure function runs only onces when first rendered.
 

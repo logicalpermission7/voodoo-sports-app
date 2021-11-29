@@ -7,7 +7,7 @@ import Calculator from './components/Calculator';
 import Coms from './components/Coms';
 import NotFound from './components/NotFound';
 
-
+// This application was created by Elvis Bueno
 
 
 

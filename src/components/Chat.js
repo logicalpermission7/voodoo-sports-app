@@ -17,8 +17,8 @@ useEffect(() => {
         const response = await fetch(URL_API);
         if (!response.ok) throw Error("Oops! network or server side problems... :(");   
         const data = await response.json();
-        console.log(data);
-        console.log(response);
+        //console.log(data);
+        //console.log(response);
         setData(data);
         } 
         catch (err) {

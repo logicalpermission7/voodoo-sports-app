@@ -27,11 +27,12 @@ function GameData(){
     const [homeTeamMoneyLine,setHomeTeamMoneyLine] = useState([]);
     const [awayTeamMoneyLine,setAwayTeamMoneyLine] = useState([]);
     const [week,setWeek] = useState([]);
-    const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`
-
     require('dotenv').config();
+    const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`;
   
 
+    
+  
 useEffect(() => {
 getGameData();
 //console.log(process.env);
@@ -46,14 +47,14 @@ getGameData();
         //e.preventDefault();
         
           try {
-            const response = await fetch(` https://api.sportsdata.io/v3/nfl/odds/json/TeamTrends/${team}?key=${SPORTS_API_KEY}`);
+            const response = await fetch(`https://api.sportsdata.io/v3/nfl/odds/json/TeamTrends/${team}?key=${SPORTS_API_KEY}`);
               if (!response.ok){ // checks if response object is not ok, then throws a message.
-                console.log("error!!!")
+                //console.log("error!!!")
                 throw Error("Oops! network or server side problems... :(");   
               }
               const sport_data = await response.json();
-        //console.log(response);
-        //console.log(sport_data);
+        console.log(response);
+        console.log(sport_data);
         setName(sport_data.UpcomingGame.AwayTeam);
         setAwayTeam(sport_data.UpcomingGame.HomeTeam);
         setStadium(sport_data.UpcomingGame.StadiumDetails.Name);
@@ -150,7 +151,7 @@ getGameData();
                     <option value='TEN'>Tennessee Titans</option>
                     <option value='WAS'>Washington Football Team</option>
                 </select>
-                
+                <button onClick={getGameData}>Get Team Data</button><br/><br/>
             </form>
         </div>
         

@@ -8,12 +8,13 @@ function TeamNews(){
     const [team,setTeam] = useState("DAL");
     const [title,setTitle] = useState([]);
     const [content,setContent] = useState([]);
-    const dotenv = require('dotenv');
+    require('dotenv').config();
     const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`;
-    dotenv.config();
+    
 
 useEffect(() => {
 getTeamNews();
+//console.log(process.env);
  }, []); 
 
 
@@ -51,10 +52,11 @@ getTeamNews();
             <div className='home'>
                 {error && <div style={{color: "#fd2600"}}>{error}</div>}
                 {isLoading && <div style={{color: "rgb(0, 248, 21)"}}>Loading.....</div>}<br/><br/>
+                <h1>Team Latest / Important News</h1>
                 {!error && !isLoading && <TeamDetails
                 title={title}
                 content={content}/>}
-            </div>  
+            </div>
             <form onSubmit={getTeamNews}>
                 <select value={team} onChange={(e) => setTeam(e.target.value)}>
                     <option value='ARI'>Arizona Cardinals</option>

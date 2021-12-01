@@ -7,7 +7,7 @@ function Nav(){
             <h1>SpreadBook</h1>
             <div className="links">
                 <Link to="/">HOME</Link>
-                <Link to="/Coms">CHAT</Link>
+                <Link to="/News">NEWS</Link>
                 <Link to="/CAL">MOPC</Link>
 
             </div>

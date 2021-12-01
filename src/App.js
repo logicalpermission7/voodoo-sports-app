@@ -2,9 +2,8 @@ import React from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav';
 import GameData from './components/GameData';
-import TeamNews from './components/TeamNews';
 import Calculator from './components/Calculator';
-import Coms from './components/Coms';
+import News from './components/News';
 import NotFound from './components/NotFound';
 
 // This application was created by Elvis Bueno
@@ -23,10 +22,9 @@ return (
       <Switch>
         <Route exact path="/">
             <GameData/>
-            <TeamNews/>
         </Route>
-        <Route path="/Coms">
-          <Coms/>
+        <Route path="/News">
+          <News/>
         </Route>
         <Route path="/CAL">
           <div className="cal-title">

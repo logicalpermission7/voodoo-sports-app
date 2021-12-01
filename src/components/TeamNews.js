@@ -51,7 +51,7 @@ getTeamNews();
         <div className="login-form">
             <div className='home'>
                 {error && <div style={{color: "#fd2600"}}>{error}</div>}
-                {isLoading && <div style={{color: "rgb(0, 248, 21)"}}>Loading.....</div>}<br/><br/>
+                {isLoading && <div style={{color: "rgb(0, 248, 21)"}}>Loading.....</div>}
                 <h1>Team Latest / Important News</h1>
                 {!error && !isLoading && <TeamDetails
                 title={title}

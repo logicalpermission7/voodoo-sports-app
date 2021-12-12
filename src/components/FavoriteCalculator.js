@@ -7,7 +7,7 @@ function FavoriteCalculator(){
 
 const [favoriteAmount,setFavoriteAmount] = useState(''); 
 const [favoriteStake,setFavoriteStake] = useState('');
-const [favoriteResult,setFavoriteResult] = useState('');
+const [favoriteResult,setFavoriteResult] = useState(0);
 
 
 const getFavoriteProfit = (e) =>{
@@ -26,9 +26,9 @@ const getFavoriteProfit = (e) =>{
                     <label>FAVORITE</label>
                     <input type="number" value={favoriteAmount} onChange={(e) => setFavoriteAmount(e.target.value)} required placeholder="Favorite Money Line Amount"></input>
                     <input type="number" value={favoriteStake} onChange={(e) => setFavoriteStake(e.target.value)}required placeholder="Enter Stake Amount"></input>
-                    <input type="text" value={"$"+ parseFloat(favoriteResult).toFixed(2) + " Profit For You!"} onChange={(e) => setFavoriteResult(e.target.value)}></input>
-                    <button onClick={getFavoriteProfit}>Get Profit</button><br/><br/>
-
+                    <input type="text" value={favoriteResult ? "$"+ parseFloat(favoriteResult).toFixed(2) + " Profit For You!" : ""} onChange={(e) => setFavoriteResult(e.target.value)} readOnly placeholder="Profit Amount"></input>
+                    <br/>
+                    <button onClick={getFavoriteProfit}>Get Profit</button>
                 </form>
 
             </div>

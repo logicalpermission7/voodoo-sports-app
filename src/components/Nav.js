@@ -6,9 +6,9 @@ function Nav(){
         <div className="navbar">
             <h1>SpreadBook</h1>
             <div className="links">
-                <Link to="/">HOME</Link>
-                <Link to="/News">NEWS</Link>
-                <Link to="/CAL">MOPC</Link>
+                <Link to="/data">DATA</Link>
+                <Link to="/news">NEWS</Link>
+                <Link to="/calculator">MOP</Link>
 
             </div>
         </div>

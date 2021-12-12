@@ -4,7 +4,7 @@ function UnderdogCalculator(){
 
  const [underDogAmount,setUnderDogAmount] = useState(''); 
  const [stake,setStake] = useState('');
- const [result,setResult] = useState('');
+ const [result,setResult] = useState(0);
 
 const getProfit = (e) =>{
     e.preventDefault();
@@ -28,9 +28,9 @@ const getProfit = (e) =>{
                 <label>UNDERDOG</label>
                 <input type="number" value={underDogAmount} onChange={(e) => setUnderDogAmount(e.target.value)} required placeholder="Underdog Money Line Amount"></input>
                 <input type="number" value={stake} onChange={(e) => setStake(e.target.value)}required placeholder="Enter Stake Amount"></input>
-                <input type="text" value={"$"+ parseFloat(result).toFixed(2)  + " Profit For You!"} onChange={(e) => setResult(e.target.value)}></input>
-                <button onClick={getProfit}>Get Profit</button><br/><br/>
-
+                <input type="text" value={result ? "$"+ parseFloat(result).toFixed(2)  + " Profit For You!": ""} onChange={(e) => setResult(e.target.value)} readOnly placeholder="Profit Amount"></input>
+                <br/>
+                <button onClick={getProfit}>Get Profit</button>
             </form>
         </div>
     )

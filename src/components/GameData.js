@@ -1,5 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import GameDetails from './GameDetails';
+import {getAuth, signOut} from 'firebase/auth';
+
+
 
 function GameData(){
     const [isLoading, setLoading] = useState(true);
@@ -29,8 +32,30 @@ function GameData(){
     const [week,setWeek] = useState([]);
     require('dotenv').config();
     const SPORTS_API_KEY = `${process.env.REACT_APP_SPORTS_KEY}`;
+   
+
+    const logout = () =>{
+      signOut(auth)
+      .then(() => {
+        localStorage.removeItem('token')  // this function will remove the local token and then log the user out and redirect them to the home page.
+        window.location.href = "https://spreadbook.netlify.app/#/"
+      })
+      .catch((e) => alert(e.message))
+      
+    }
   
 
+    useEffect(() => {
+      const token = localStorage.getItem('token'); // this will check for local token and keep you logged in if token is true.
+
+      if (!token) {
+        window.location.href = "https://spreadbook.netlify.app/#/"
+      }
+  }, [])
+
+
+  const auth = getAuth();
+  const user = auth.currentUser;
     
   
 useEffect(() => {
@@ -50,11 +75,11 @@ getGameData();
             const response = await fetch(`https://api.sportsdata.io/v3/nfl/odds/json/TeamTrends/${team}?key=${SPORTS_API_KEY}`);
               if (!response.ok){ // checks if response object is not ok, then throws a message.
                 //console.log("error!!!")
-                throw Error("Oops! network or server side problems... :(");   
+                throw Error("Oops! Servers are Temporarily Unavailable ...");   
               }
               const sport_data = await response.json();
-        console.log(response);
-        console.log(sport_data);
+        //console.log(response);
+        //console.log(sport_data);
         setName(sport_data.UpcomingGame.AwayTeam);
         setAwayTeam(sport_data.UpcomingGame.HomeTeam);
         setStadium(sport_data.UpcomingGame.StadiumDetails.Name);
@@ -79,7 +104,7 @@ getGameData();
         setTeamAway(sport_data.UpcomingGame.AwayTeam);
         setError(null);
         } catch (err) {
-          setError("Oops! network or server side problems... :(");
+          setError("Oops! Servers are Temporarily Unavailable ...");
         } finally {
           setLoading(false);
         }
@@ -87,11 +112,14 @@ getGameData();
 
 
     return(
-        <div className="login-form">
+        <div className="game-data">
+          <br/><br/>
           {error && <div style={{color: "#fd2600"}}>{error}</div>}
           {isLoading && <div style={{color: "rgb(0, 248, 21)"}}>Loading.....</div>}
+          <br/><br/>
           <div className='home'>
-                {!error && !isLoading  && <GameDetails 
+            <p>{user && "Hello! " + user.displayName}</p>
+                <GameDetails 
                 name={name}
                 awayTeam={awayTeam}
                 stadium={stadium}
@@ -114,7 +142,7 @@ getGameData();
                 homeTeamMoneyLine={homeTeamMoneyLine}
                 awayTeamMoneyLine={awayTeamMoneyLine}
                 teamAway={teamAway}
-                />}
+                />
             </div>
             <form onSubmit={getGameData}>
                 <select value={team} onChange={(e) => setTeam(e.target.value)}>
@@ -151,7 +179,9 @@ getGameData();
                     <option value='TEN'>Tennessee Titans</option>
                     <option value='WAS'>Washington Football Team</option>
                 </select>
-                <button onClick={getGameData}>Get Team Data</button><br/><br/>
+                <br/><br/>
+                <button onClick={getGameData}>Get Team Data</button><br/><br/><br/><br/>
+                <p onClick={logout}>LOGOUT</p>
             </form>
         </div>
         

@@ -25,7 +25,7 @@ getTeamNews();
             const response = await fetch(`https://api.sportsdata.io/v3/nfl/scores/json/NewsByTeam/${team}?key=${SPORTS_API_KEY}`);
             if (!response.ok){ // checks if response object is not ok, then throws a message.
               console.log("error!!!")
-              throw Error("Oops! network or server side problems... :(");   
+              throw Error("Oops! Servers are Temporarily Unavailable ...");   
             }
             const team_news = await response.json();
             //console.log(response);
@@ -35,7 +35,7 @@ getTeamNews();
             setError(null);
          }
           catch (err){
-            setError("Oops! network or server side problems... :(");
+            setError("Oops! Servers are Temporarily Unavailable ...");
         } finally {
             setLoading(false);
         }
@@ -48,14 +48,16 @@ getTeamNews();
 
 
     return(
-        <div className="login-form">
+        <div className="team-news">
             <div className='home'>
+                <br/><br/>
                 {error && <div style={{color: "#fd2600"}}>{error}</div>}
                 {isLoading && <div style={{color: "rgb(0, 248, 21)"}}>Loading.....</div>}
+                <br/><br/>
                 <h1>Team Latest / Important News</h1>
-                {!error && !isLoading && <TeamDetails
+                <TeamDetails
                 title={title}
-                content={content}/>}
+                content={content}/>
             </div>
             <form onSubmit={getTeamNews}>
                 <select value={team} onChange={(e) => setTeam(e.target.value)}>
@@ -92,6 +94,7 @@ getTeamNews();
                     <option value='TEN'>Tennessee Titans</option>
                     <option value='WAS'>Washington Football Team</option>
                 </select>
+                <br/><br/>
                 <button onClick={getTeamNews}>Get Team News</button><br/><br/>
             </form>
         </div>
